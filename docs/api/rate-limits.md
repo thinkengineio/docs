@@ -52,4 +52,4 @@ In addition to the per-IP rate limit, your subscription tier determines monthly 
 }
 ```
 
-See [Billing](/docs/api/billing) for tier details.
+See [Billing](/api/billing) for tier details.
