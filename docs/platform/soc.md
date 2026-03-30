@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Security Operations (SOC)
-description: Security Operations Center dashboard
+description: Security Operations Center dashboard with bulk actions and Sofia AI triage
 ---
 
 # Security Operations (SOC)
@@ -16,66 +16,97 @@ The SOC dashboard displays:
 - **Active alerts** -- Alerts that have not yet been acknowledged or resolved.
 - **Threat timeline** -- A chronological view of security events across your fleet, with severity-coded markers.
 - **Top sources** -- The endpoints generating the most alerts.
-- **Detection categories** -- Alert distribution by category (e.g., malware, policy violation, anomalous behavior, misconfigurations).
+- **Detection categories** -- Alert distribution by category (e.g., threat-detection, network, authentication, vulnerability, file-integrity, container).
 
-## Alerts
+The SOC page is also accessible as a tab within the unified **SecOps Command** view at `/secops`, alongside Triage and Incidents.
 
-### Severity Levels
+## Severity and Priority
 
-Every alert is assigned a severity:
+Every finding has two independent axes:
 
-| Severity | Description |
+### Severity (S1--S4) -- Machine-set, technical impact
+
+| Level | Risk Score | Description |
+|---|---|---|
+| **S1 Critical** | 80--100 | Active exploitation, data breach, complete compromise |
+| **S2 High** | 50--79 | Significant risk, active probing, privilege escalation |
+| **S3 Medium** | 20--49 | Suspicious activity warranting investigation |
+| **S4 Low** | 0--19 | Informational, minor misconfigurations |
+
+### Priority (P1--P4) -- Analyst-set, business urgency
+
+| Level | SLA Response | Description |
+|---|---|---|
+| **P1 Immediate** | 15 min | Drop everything, fix now |
+| **P2 High** | 1 hour | Fix in current sprint |
+| **P3 Medium** | 4 hours | Regular backlog |
+| **P4 Low** | 24 hours | Best effort |
+
+Severity and priority can mismatch. A critical vulnerability on a test server (S1 + P3) is different from a medium finding on a payment system (S3 + P1).
+
+## Bulk Actions
+
+Select multiple events using checkboxes, then apply actions in bulk:
+
+- **Acknowledge** -- Mark selected events as reviewed
+- **Resolve** -- Close selected events
+- **Close** -- Archive resolved events
+- **Escalate** -- Promote to incident with a reason
+- **Set Priority** -- Override priority (P1--P4) for all selected
+- **Suppress** -- Mark as false positive with reason
+
+Select all events on the current page using the header checkbox. Actions are applied via the bulk action bar that appears above the table.
+
+## Sofia AI Triage
+
+Click any event to open the detail panel, then click **Run Sofia Triage** to get an AI-powered analysis. Sofia evaluates:
+
+- Risk score and severity assessment
+- MITRE ATT&CK context (tactic and technique)
+- Compliance scope (GDPR, HIPAA, PCI-DSS, etc.)
+- Regulatory deadline urgency
+- Priority upgrade recommendations
+
+Sofia's analysis is added as a comment to the finding timeline.
+
+### Event-Driven Triage
+
+S1 and S2 findings with compliance frameworks are automatically triaged by Sofia at ingestion time -- no manual trigger needed.
+
+## Alert Correlation
+
+### Rule A: De-duplication
+
+Repeated events from the same host and category within a 15-minute window are de-duplicated. The SOC page shows a de-duplication count badge when multiple raw alerts were consolidated.
+
+### Rule B: Kill-Chain Correlation
+
+Multi-stage attacks across categories on the same host are correlated into super-alerts:
+
+| Pattern | Stages |
 |---|---|
-| **Critical** | Immediate action required. Active exploitation, data exfiltration, or complete control compromise. |
-| **High** | Significant risk. Vulnerabilities being actively probed, privilege escalation attempts, or policy violations with material impact. |
-| **Medium** | Moderate risk. Suspicious activity that warrants investigation but does not indicate active compromise. |
-| **Low** | Minor risk. Informational findings that may indicate misconfigurations or non-critical policy deviations. |
-| **Info** | No immediate risk. Baseline telemetry events logged for audit and correlation purposes. |
-
-### Viewing Alert Details
-
-Click any alert to open its detail view:
-
-- **Summary** -- What was detected, on which endpoint, and when.
-- **Raw event data** -- The underlying telemetry that triggered the alert.
-- **MITRE mapping** -- If the detection maps to a MITRE ATT&CK technique, the technique ID and tactic are shown.
-- **Related alerts** -- Other alerts from the same endpoint or matching the same detection pattern.
-- **Sentinel agent** -- Which agent reported the event, with a link to its fleet detail.
+| KC-001 | Vulnerability scan + C2 communication |
+| KC-002 | Auth failure + network anomaly |
+| KC-003 | File integrity change + container escape |
 
 ## Triage Workflow
 
-Alerts follow a triage workflow:
+Events follow a triage workflow:
 
-1. **New** -- The alert has arrived and has not been reviewed.
-2. **Acknowledged** -- An analyst has seen the alert and taken ownership.
+1. **New** -- The event has arrived and has not been reviewed.
+2. **Acknowledged** -- An analyst has seen the event and taken ownership.
 3. **Investigating** -- Active investigation is underway.
-4. **Resolved** -- The alert has been addressed (true positive remediated or false positive dismissed).
-
-To triage an alert:
-
-1. Open the alert detail page.
-2. Click **Acknowledge** to signal you are reviewing it.
-3. Add investigation notes as you work.
-4. When finished, click **Resolve** and select a resolution reason: **true positive -- remediated**, **false positive**, or **expected behavior**.
-
-Resolved alerts remain searchable for audit and trend analysis.
-
-## Threat Timeline
-
-The threat timeline provides a chronological view of all security events across your fleet. Use it to:
-
-- **Correlate events** -- See related alerts that occurred around the same time on the same or different endpoints.
-- **Identify patterns** -- Spot repeated attack attempts or spreading lateral movement.
-- **Filter** -- Narrow the timeline by severity, endpoint, detection category, or time range.
+4. **Resolved** -- The event has been addressed.
+5. **Closed** -- Archived after resolution.
 
 ## Integration with Sentinel
 
-The SOC module receives alerts from your deployed [Sentinel agents](/sentinel/overview). Sentinel performs on-endpoint detection (CIS hardening violations, file integrity changes, threat behaviors, vulnerability findings, secrets exposure) and forwards events to ThinkEngine, where they appear in the SOC dashboard.
+The SOC module receives alerts from your deployed [Sentinel agents](/sentinel/overview). Sentinel performs on-endpoint detection (CIS hardening, file integrity, threat behaviors, vulnerability findings, secrets exposure) and forwards events to ThinkEngine.
 
-For details on configuring Sentinel's detection and forwarding capabilities, see [Sentinel Configuration](/sentinel/configuration) and [Fleet Mode](/sentinel/fleet-mode).
+For details on configuring Sentinel, see [Sentinel Configuration](/sentinel/configuration) and [Fleet Mode](/sentinel/fleet-mode).
 
 ## Next Steps
 
-- [Incidents](/platform/incidents) -- Escalate alerts into tracked incidents.
-- [MITRE ATT&CK](/platform/mitre) -- View detection coverage against the ATT&CK framework.
-- [GRC](/platform/grc) -- Map security findings to compliance controls.
+- [Triage Inbox](/platform/dashboard) -- Priority-sorted findings with risk scoring
+- [Incidents](/platform/incidents) -- Escalated findings requiring deep investigation
+- [GRC](/platform/grc) -- Compliance controls and regulatory mapping

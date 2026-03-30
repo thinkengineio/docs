@@ -1,82 +1,64 @@
 ---
 sidebar_position: 6
 title: Incidents
-description: Incident management
+description: Incident management with bulk actions and escalation from triage
 ---
 
 # Incidents
 
-The Incidents module provides structured incident tracking from detection through resolution. Incidents can be created manually or generated automatically from security alerts, giving your team a consistent process for handling security events.
+The Incidents module tracks escalated security findings that require deep investigation. Incidents are **not raw alerts** -- they are findings that an analyst has explicitly promoted from the Triage inbox via the **Escalate** action.
 
-## Creating an Incident
+The Incidents page is also accessible as a tab within the unified **SecOps Command** view at `/secops`.
 
-### From an Alert
+## How Findings Become Incidents
 
-When triaging an alert in the [SOC module](/platform/soc), click **Escalate to Incident** to create an incident pre-populated with the alert details, affected endpoint, and timeline context.
+A finding becomes an incident when an analyst clicks **Escalate** in the Triage or SOC detail panel. This:
 
-### Manually
+1. Sets `escalated_to_incident = TRUE` on the finding
+2. Bumps priority (e.g., P3 becomes P2)
+3. Recomputes SLA timers based on the new priority
+4. Adds the escalation reason to the finding timeline
 
-1. Go to **Incidents** in the sidebar.
-2. Click **+ New Incident**.
-3. Fill in the incident title, description, severity, and any initial notes.
-4. Click **Create**.
+The Incidents page queries only findings where `escalated_to_incident = TRUE`.
 
-## Incident Lifecycle
+## Bulk Actions
 
-Every incident moves through a defined lifecycle:
+Select multiple incidents using checkboxes, then apply actions in bulk:
 
-| Status | Description |
-|---|---|
-| **Open** | Incident has been created and needs attention. |
-| **Investigating** | The team is actively analyzing the incident to determine scope and impact. |
-| **Mitigating** | Root cause is understood and containment or remediation actions are in progress. |
-| **Resolved** | The immediate threat has been addressed. Monitoring continues to confirm resolution. |
-| **Closed** | Incident is fully resolved, reviewed, and documented. No further action required. |
-
-To advance an incident through the lifecycle, open the incident detail page and click the status transition button (e.g., **Start Investigation**, **Begin Mitigation**, **Resolve**, **Close**).
+- **Acknowledge** -- Take ownership of selected incidents
+- **Resolve** -- Close selected incidents
+- **Close** -- Archive after resolution
+- **Set Priority** -- Override priority (P1--P4) for all selected
+- **Suppress** -- Mark as false positive with reason
 
 ## Incident Detail
 
-The incident detail page includes:
+Click any incident to open the detail panel:
 
-- **Summary** -- Title, severity, current status, and assigned owner.
-- **Timeline** -- A chronological log of all activity: status changes, notes added, related alerts linked, and assignments made.
-- **Related alerts** -- SOC alerts linked to this incident.
-- **Notes** -- Free-form investigation notes added by team members. Each note is timestamped and attributed.
-- **Attachments** -- Upload files, screenshots, or log excerpts relevant to the investigation.
+- **Severity + Priority** -- S-level badge (machine-set) + P-level badge (analyst-set, with analyst icon when overridden)
+- **Risk Score** -- Composite score out of 100 with full breakdown (base, MITRE, asset, EPSS, KEV, threat intel)
+- **Kill-Chain Evidence** -- If the incident was correlated from a kill-chain pattern, linked finding IDs and category tags are shown
+- **Compliance Context** -- Framework tags (HIPAA, GDPR, PCI-DSS) + regulatory deadline countdown
+- **De-dup Count** -- How many raw alerts were consolidated into this finding
+- **Timeline** -- Chronological log of all actions, including Sofia AI comments
+- **Sofia Triage** -- Click **Run Sofia Triage** for AI-powered analysis and recommendations
+
+## Incident Lifecycle
+
+| Status | Description |
+|---|---|
+| **New** | Escalated from triage, needs attention |
+| **Acknowledged** | Analyst has taken ownership |
+| **Investigating** | Active analysis underway |
+| **Resolved** | Threat addressed, monitoring for confirmation |
+| **Closed** | Fully resolved and documented |
 
 ## Assigning Incidents
 
-Click **Assign** on the incident detail page to assign the incident to a team member. Assignments are logged in the timeline so ownership history is always clear.
-
-You can reassign at any time -- for example, handing off from a first responder to a specialist.
-
-## Updating an Incident
-
-As the investigation progresses:
-
-1. **Add notes** -- Document findings, hypotheses, and actions taken.
-2. **Link alerts** -- Attach additional SOC alerts that are related to the same incident.
-3. **Update severity** -- If the scope changes, adjust the severity up or down.
-4. **Advance status** -- Move through the lifecycle as the incident progresses.
-
-All changes are captured in the incident timeline for a full audit trail.
-
-## Post-Incident Review
-
-After an incident is resolved:
-
-1. Click **Close** to transition the incident to the closed state.
-2. Optionally add a **post-incident review** summary covering:
-   - **Root cause** -- What caused the incident.
-   - **Impact** -- What was affected and for how long.
-   - **Lessons learned** -- What can be improved.
-   - **Action items** -- Follow-up tasks to prevent recurrence.
-
-Post-incident reviews are stored with the incident record and can be referenced during future audits or trend analysis.
+Click **Assign** in the detail panel to assign to a team member. Assignments are logged in the timeline. Bulk assignment is available via the bulk action bar.
 
 ## Next Steps
 
-- [SOC](/platform/soc) -- Monitor and triage alerts before they become incidents.
-- [GRC](/platform/grc) -- Map incident findings to compliance controls.
-- [Incidents API](/api/incidents) -- Manage incidents programmatically.
+- [SOC](/platform/soc) -- Monitor and triage alerts before escalation
+- [Triage Inbox](/platform/dashboard) -- Priority-sorted findings queue
+- [GRC](/platform/grc) -- Map incident findings to compliance controls

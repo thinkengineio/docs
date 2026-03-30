@@ -1,21 +1,27 @@
 ---
 sidebar_position: 4
 title: GRC
-description: Governance, Risk & Compliance
+description: Governance, Risk & Compliance — tabbed dashboard with Sofia AI compliance engine
 ---
 
 # Governance, Risk & Compliance (GRC)
 
 The GRC module helps you manage compliance obligations, track risks, and collect audit evidence -- all in one place. Whether you are preparing for an audit, mapping controls to multiple frameworks, or tracking remediation of compliance gaps, GRC provides the structure and visibility you need.
 
-## Overview
+## GRC Command Dashboard
 
-The GRC dashboard shows:
+The GRC page (`/grc`) is a unified tabbed interface containing:
 
-- **Framework compliance** -- Percentage of controls satisfied per tracked framework.
-- **Open risks** -- Number of risks in the register that are above your risk tolerance threshold.
-- **Pending evidence** -- Controls that are awaiting evidence uploads.
-- **Nonconformities** -- Active compliance gaps requiring remediation.
+| Tab | Description |
+|---|---|
+| **Overview** | Framework compliance percentages, open risks, pending evidence, active NCRs |
+| **Risks** | Risk register with heatmap and scoring |
+| **Controls** | Control requirements mapped to frameworks |
+| **Evidence** | Audit evidence uploads linked to controls |
+| **Policies** | Security and compliance policy management |
+| **Vendors** | Third-party vendor assessment and risk tracking |
+| **NCRs** | Non-conformity reports (auto-generated and manual) |
+| **Trust Center** | Customer-facing compliance posture page |
 
 ## Compliance Frameworks
 
@@ -29,28 +35,68 @@ ThinkEngine supports tracking against industry-standard compliance frameworks in
 - **HIPAA**
 - **GDPR** (technical controls)
 
-To add a framework:
+Controls that overlap across frameworks are automatically cross-mapped -- evidence uploaded once applies everywhere it is relevant.
 
-1. Go to **GRC > Frameworks**.
-2. Click **+ Add Framework**.
-3. Select from the built-in framework library or create a custom framework.
-4. ThinkEngine populates the control set for the selected framework.
+## Compliance-Aware Risk Scoring
 
-You can track multiple frameworks simultaneously. Controls that overlap across frameworks are automatically cross-mapped.
+Findings from the SOC and Triage modules are automatically scored with compliance context:
+
+- **Framework detection** -- Assets are auto-tagged with applicable frameworks (HIPAA for healthcare systems, PCI-DSS for payment infrastructure, GDPR for EU data stores)
+- **Compliance boost** -- Findings on compliance-scoped assets receive a risk score boost (HIPAA +15, PCI-DSS +12, GDPR +10, capped at +25)
+- **Regulatory deadlines** -- Findings on compliance-scoped assets get a regulatory reporting deadline based on the strictest applicable framework
+
+### Regulatory Deadline Reference
+
+| Framework | S1 Critical | S2 High | S3 Medium | S4 Low |
+|---|---|---|---|---|
+| **NIST** | 1 hour | 24 hours | 72 hours | 30 days |
+| **GDPR** | 72 hours | 7 days | 30 days | 90 days |
+| **HIPAA** | 24 hours | 60 days | 60 days | 180 days |
+| **PCI-DSS** | 24 hours | 72 hours | 30 days | 90 days |
+
+## Sofia Compliance Engine
+
+Sofia runs a background compliance sweep every 5 minutes, checking all findings with regulatory deadlines:
+
+### 3-Tier Auto-Escalation
+
+| Tier | Trigger | Action |
+|---|---|---|
+| **Tier 1 -- Nudge** | 50% of deadline elapsed | Sofia adds a reminder comment to the finding timeline |
+| **Tier 2 -- Draft NCR** | 90% of deadline elapsed | Auto-generates a draft Non-Conformity Report for GRC review |
+| **Tier 3 -- Breach** | 100% of deadline elapsed | Opens the NCR, marks control FAILED, fires webhook notification to GRC team |
+
+### Manual Sweep
+
+Trigger a compliance sweep on demand:
+- **API**: `POST /api/compliance/sweep`
+- **Chat**: Ask Sofia "run compliance sweep"
+
+## Nonconformities (NCRs)
+
+Nonconformities represent compliance gaps. They can be:
+
+- **Auto-generated** -- Created by Sofia's compliance engine when regulatory deadlines are breached (Tier 2/3)
+- **Manually created** -- Added by your team during internal audits or assessments
+
+Each nonconformity includes:
+
+- **Severity** -- Major, minor, or observation
+- **Source** -- Internal audit, external audit, management review, incident, customer complaint, self-identified
+- **Affected controls** -- Which controls are impacted
+- **Root cause** -- Linked to the original finding
+- **Remediation plan** -- Steps to close the gap, with an owner and target date
+- **Evidence** -- Auto-attached from Sentinel scan results
 
 ## Controls Management
 
-Controls are the individual requirements within a compliance framework. For each control you can:
+For each control you can:
 
-- **View the requirement** -- The control description and its framework source.
-- **Set status** -- Mark the control as **implemented**, **partially implemented**, **planned**, or **not applicable**.
-- **Map evidence** -- Link uploaded evidence to the control.
-- **Assign ownership** -- Assign a team member responsible for the control.
-- **Track history** -- See when the control status last changed and by whom.
-
-### Cross-Mapping
-
-When a single security measure satisfies requirements in multiple frameworks (e.g., "access control" in both SOC 2 and ISO 27001), ThinkEngine cross-maps the control so evidence uploaded once applies everywhere it is relevant.
+- **View the requirement** -- The control description and its framework source
+- **Set status** -- Implemented, partially implemented, planned, or not applicable
+- **Map evidence** -- Link uploaded evidence to the control
+- **Assign ownership** -- Assign a team member responsible for the control
+- **Track history** -- See when the control status last changed and by whom
 
 ## Evidence Collection
 
@@ -62,46 +108,26 @@ Audit evidence is uploaded and linked to controls:
 4. Add a description and the date the evidence was collected.
 5. Save.
 
-Evidence is stored securely and versioned. Auditors can be granted read-only access to review evidence without modifying controls.
-
-## Policy Management
-
-The Policies section lets you:
-
-- **Create policies** -- Draft security and compliance policies using the built-in editor.
-- **Track versions** -- Each policy edit creates a new version with a changelog.
-- **Link to controls** -- Associate policies with the controls they support.
-- **Set review dates** -- Schedule periodic policy reviews and receive reminders.
+Evidence is stored securely and versioned.
 
 ## Risk Register
 
-The risk register tracks identified risks across your organization:
+The risk register tracks identified risks:
 
-- **Add a risk** -- Describe the risk, assign a category (operational, technical, regulatory, third-party), and set the owner.
-- **Score risks** -- Assign likelihood and impact scores. ThinkEngine calculates a composite risk rating.
-- **Define treatment** -- Choose a treatment strategy: **mitigate**, **accept**, **transfer**, or **avoid**.
-- **Track mitigation** -- Link mitigation tasks and monitor progress over time.
-- **Review** -- Set review cadences to ensure risks are reassessed regularly.
+- **Score risks** -- Likelihood and impact scores with composite risk rating
+- **Define treatment** -- Mitigate, accept, transfer, or avoid
+- **Track mitigation** -- Link mitigation tasks and monitor progress
+- **Review cadences** -- Scheduled reassessment reminders
 
-Risks are displayed in a heatmap (likelihood vs. impact) and a sortable table.
+## Policy Management
 
-## Nonconformities
-
-Nonconformities represent compliance gaps -- places where a control requirement is not met. They can be:
-
-- **Auto-generated** -- Created automatically when a Sentinel scan or code security scan detects a finding that maps to a control.
-- **Manually created** -- Added by your team during internal audits or assessments.
-
-Each nonconformity includes:
-
-- **Description** -- What the gap is.
-- **Affected controls** -- Which controls are impacted.
-- **Severity** -- Critical, high, medium, or low.
-- **Remediation plan** -- Steps to close the gap, with an owner and target date.
-- **Status** -- Open, in progress, or closed.
+- **Create policies** -- Draft security and compliance policies
+- **Track versions** -- Each edit creates a new version with changelog
+- **Link to controls** -- Associate policies with supporting controls
+- **Set review dates** -- Scheduled periodic reviews with reminders
 
 ## Next Steps
 
-- [Code Security](/platform/code-security) -- Scan results that feed into GRC controls.
-- [SOC](/platform/soc) -- Security alerts that may generate nonconformities.
-- [GRC API](/api/grc) -- Manage GRC data programmatically.
+- [SOC](/platform/soc) -- Security events that feed into GRC findings
+- [Code Security](/platform/code-security) -- Scan results mapped to controls
+- [GRC API](/api/grc) -- Manage GRC data programmatically
