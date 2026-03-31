@@ -8,7 +8,9 @@ description: Incident management with bulk actions and escalation from triage
 
 The Incidents module tracks escalated security findings that require deep investigation. Incidents are **not raw alerts** -- they are findings that an analyst has explicitly promoted from the Triage inbox via the **Escalate** action.
 
-The Incidents page is also accessible as a tab within the unified **SecOps Command** view at `/secops`.
+The Incidents page is also accessible as the **Response** tab within the unified **SecOps Command** view at `/secops` (tab order: Monitoring > Triage > Response).
+
+Every findings table in SecOps displays a **FND ID** column, providing a consistent finding identifier across all tabs.
 
 ## How Findings Become Incidents
 

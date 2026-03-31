@@ -91,3 +91,34 @@ v2.0.0 is a complete architectural rewrite with a clean package hierarchy, persi
 | `--osv-only` | Force OSV.dev API vulnerability lookup, skip external tools |
 
 All existing flags from v1.x are fully preserved and backward compatible.
+
+---
+
+## Endpoints Page
+
+The **Endpoints** page in the ThinkEngine dashboard (`/sentinel/endpoints`) is the central hub for managing and inspecting your monitored infrastructure. It is organized into three tabs:
+
+### Fleet Tab
+
+The default view lists all monitored endpoints with status, platform, last-seen time, hardening score, and open vulnerability counts. This is the same fleet overview previously available at the top level.
+
+### SBOM Tab
+
+The **SBOM** (Software Bill of Materials) tab provides a full inventory for each endpoint:
+
+| Category | Details |
+|---|---|
+| **Packages** | All installed packages with versions |
+| **Users** | Local user accounts and groups |
+| **Services** | Running and enabled system services |
+| **Open Ports** | Listening ports with associated processes |
+| **Cron Jobs** | Scheduled tasks and cron entries |
+| **Mounts** | Mounted filesystems and volumes |
+
+SBOM data is collected by the Sentinel agent's inventory module and updated on each scan interval. You can **export** SBOM data in three formats: **CSV**, **JSON**, and **PDF**.
+
+### Search Tab
+
+The **Search** tab lets you query endpoint telemetry -- search across all security modules for events on any endpoint. This functionality was previously located in Security Analytics and has been moved here for direct context alongside endpoint data.
+
+Search supports filtering by module (`hardening`, `vulnerabilities`, `threats`, `fim`, etc.), severity level, and free-text query.

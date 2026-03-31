@@ -5,7 +5,21 @@ sidebar_position: 7
 
 # Security Analytics
 
-The Security Analytics API provides access to the SIEM-lite analytics engine, including threat detection, risk scoring, correlation findings, and event timelines.
+The Security Analytics API provides access to the SIEM-lite analytics engine, including threat detection, risk scoring, and event timelines.
+
+## UI Tabs
+
+The Security Analytics page in the dashboard is organized into the following tabs:
+
+| Tab | Description |
+|---|---|
+| **Dashboard** | Top-level metrics, alert volume, and threat timeline |
+| **Rules** | Correlation and detection rules with a **Create Rule** form and **enable/disable** toggles per rule |
+| **Risk Scoring** | Organization and per-endpoint risk scores with factor breakdowns |
+| **GRC Validation** | Compliance control validation against security posture data |
+| **AI Analysis** | Sofia AI-powered analysis of trends, anomalies, and recommendations |
+
+**Removed tabs:** The **Correlations** tab has been removed -- correlation findings now flow directly into the [SecOps triage queue](/platform/soc). The **Search** tab has been removed -- search is now available in the [Endpoints page](/sentinel/overview#search-tab) alongside endpoint telemetry.
 
 ## Endpoints
 
@@ -112,7 +126,11 @@ curl https://thinkengine.io/api/sentinel/analytics/risk \
 
 ### `GET /api/sentinel/analytics/search`
 
-Search across all security modules for events matching a query.
+:::note
+The Search tab has moved from Security Analytics to the **Endpoints** page in the UI. The API endpoint remains the same for backward compatibility.
+:::
+
+Search across all security modules for events matching a query. In the dashboard UI, this functionality is now accessed from the **Search** tab on the [Endpoints page](/sentinel/overview#search-tab).
 
 **Authentication:** Bearer token required
 

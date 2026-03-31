@@ -26,6 +26,18 @@ A summary of your AI-powered tasks grouped by status -- **pending**, **running**
 
 A composite score (0--100) derived from your latest Sentinel scans, code security findings, and compliance control status. The score updates continuously as new data arrives.
 
+### Critical Count
+
+The critical alert count on the dashboard reflects only **unresolved** events. Resolved or closed critical findings are excluded from this metric, giving you an accurate picture of active threats requiring attention.
+
+### GRC Cards
+
+The GRC summary cards display **real counts** pulled from the database -- the number of active policies, registered vendors, and other GRC entities. These are live values, not static placeholders.
+
+### SBOM Overview
+
+The SBOM overview widget summarizes software bill of materials data across your fleet, showing aggregate counts of **packages**, **users**, and **services** per endpoint. Click through to the Endpoints SBOM tab for full inventory detail.
+
 ### Recent Alerts
 
 The five most recent security alerts from your Sentinel agents, sorted by severity. Each alert links to its full detail in the SOC module.

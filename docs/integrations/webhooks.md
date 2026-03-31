@@ -113,6 +113,51 @@ If your endpoint returns a non-2xx status code or does not respond within 10 sec
 
 After 5 failed retries, the delivery is marked as failed. You can view and manually retry failed deliveries from the webhook detail page in the dashboard.
 
+## Configurable Action Types
+
+Each integration channel (webhook, email, Discord, Microsoft Teams) has configurable **action_types** that control which notification actions are dispatched to it. Available actions:
+
+| Action | Description |
+|---|---|
+| `assign` | A finding was assigned to an analyst |
+| `comment` | A comment was added to a finding |
+| `escalate` | A finding was escalated to an incident |
+| `resolve` | A finding was resolved |
+| `close` | A finding was closed |
+| `acknowledge` | A finding was acknowledged |
+| `suppress` | A finding was suppressed (false positive) |
+| `reopen` | A closed finding was reopened |
+
+Configure action types per channel from **Settings > Integrations**.
+
+## Channel-Specific Behavior
+
+### Email
+
+- **assign** notifications are sent to the assignee's email address.
+- **comment** notifications are sent to the finding's current assignee.
+- Timestamps use the **timezone** configured in the integration settings (IANA format, e.g. `America/New_York`).
+
+### Discord
+
+- Timestamps use Discord's native epoch format (`<t:epoch:F>`), which renders in each user's local timezone.
+
+### Microsoft Teams
+
+- Timestamps use the **timezone** configured in the integration settings (IANA format, e.g. `Europe/London`).
+
+### Slack
+
+- Timestamps use Slack's native formatting, which renders in each user's local timezone. See [Slack Integration](/integrations/slack) for full details.
+
+### Timezone Configuration (Email and Teams)
+
+Email and Microsoft Teams integrations include a **timezone** field (IANA timezone string). This controls how timestamps are formatted in notification messages. Set it from **Settings > Integrations > [Email or Teams] > Timezone**.
+
+## Integration Storage
+
+All integration configurations are stored in **PostgreSQL**, ensuring durability and transactional consistency. This replaces the previous Redis-based storage.
+
 ## Managing Webhooks
 
 From **Settings > Integrations > Webhooks** you can:
@@ -120,6 +165,7 @@ From **Settings > Integrations > Webhooks** you can:
 - **View delivery history** -- See recent deliveries with status codes and response times.
 - **Retry failed deliveries** -- Manually trigger a re-delivery for any failed attempt.
 - **Edit subscriptions** -- Add or remove event types.
+- **Edit action types** -- Choose which notification actions trigger deliveries.
 - **Rotate signing secret** -- Generate a new signing secret (the old one is immediately invalidated).
 - **Disable or delete** -- Pause deliveries without deleting the webhook, or remove it entirely.
 

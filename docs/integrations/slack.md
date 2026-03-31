@@ -81,6 +81,27 @@ The Slack bot can send notifications to a designated channel when key events occ
 
 Configure notification channels from **Settings > Integrations > Slack > Notifications**.
 
+### Configurable Action Types
+
+Each Slack integration channel has configurable **action_types** that control which notification actions are dispatched to it. Available actions:
+
+| Action | Description |
+|---|---|
+| `assign` | A finding was assigned to an analyst |
+| `comment` | A comment was added to a finding |
+| `escalate` | A finding was escalated to an incident |
+| `resolve` | A finding was resolved |
+| `close` | A finding was closed |
+| `acknowledge` | A finding was acknowledged |
+| `suppress` | A finding was suppressed (false positive) |
+| `reopen` | A closed finding was reopened |
+
+Select which actions each channel should receive from **Settings > Integrations > Slack > Notifications > Action Types**.
+
+### Timestamp Formatting
+
+Slack notifications use Slack's native timestamp formatting, so timestamps automatically display in each user's local timezone.
+
 ## Configuration
 
 From **Settings > Integrations > Slack** you can:
@@ -88,6 +109,9 @@ From **Settings > Integrations > Slack** you can:
 - **Notification channel** -- Choose which channel receives automated notifications.
 - **Allowed channels** -- Restrict which channels the bot responds in (default: all channels it is invited to).
 - **Notification types** -- Select which event types trigger Slack notifications.
+- **Action types** -- Select which notification actions are dispatched to each channel.
+
+Integration configuration is stored in PostgreSQL (not Redis), ensuring durability and consistency across restarts.
 
 ## Next Steps
 

@@ -18,7 +18,9 @@ The SOC dashboard displays:
 - **Top sources** -- The endpoints generating the most alerts.
 - **Detection categories** -- Alert distribution by category (e.g., threat-detection, network, authentication, vulnerability, file-integrity, container).
 
-The SOC page is also accessible as a tab within the unified **SecOps Command** view at `/secops`, alongside Triage and Incidents.
+The SOC page is also accessible as a tab within the unified **SecOps Command** view at `/secops`. The SecOps tab order is **Monitoring > Triage > Response**.
+
+Every findings table in SecOps displays a **FND ID** column, providing a consistent finding identifier across all tabs.
 
 ## Severity and Priority
 
@@ -88,6 +90,8 @@ Multi-stage attacks across categories on the same host are correlated into super
 | KC-001 | Vulnerability scan + C2 communication |
 | KC-002 | Auth failure + network anomaly |
 | KC-003 | File integrity change + container escape |
+
+Correlation findings flow directly into the **SecOps triage queue** as actionable findings. There is no separate correlations tab in Security Analytics -- correlated events appear alongside other findings in the Triage tab for unified analyst workflow.
 
 ## Triage Workflow
 
