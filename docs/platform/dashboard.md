@@ -32,7 +32,7 @@ The critical alert count on the dashboard reflects only **unresolved** events. R
 
 ### GRC Cards
 
-The GRC summary cards display **real counts** pulled from the database -- the number of active policies, registered vendors, and other GRC entities. These are live values, not static placeholders.
+The GRC summary cards display **real counts** pulled from the database -- the number of active policies, registered vendors, and other GRC entities. These are live values, not static placeholders. Cards also reflect automated control validation from ATTM fire drills -- controls with recent fire drill evidence show a validated badge, while controls with detection gaps are flagged for review.
 
 ### SBOM Overview
 
@@ -48,7 +48,7 @@ Live status indicators for connected Sentinel agents, integration health (GitHub
 
 ### Compliance Overview
 
-A compact view of your tracked compliance frameworks showing the percentage of controls that are satisfied, partially met, or missing evidence.
+A compact view of your tracked compliance frameworks showing the percentage of controls that are satisfied, partially met, or missing evidence. When ATTM fire drills run, their results automatically generate evidence artifacts for mapped GRC controls -- successfully detected techniques count as validated controls, while detection gaps surface as nonconformities. This gives you a continuously updated compliance posture without manual evidence collection.
 
 ### Cost Summary
 

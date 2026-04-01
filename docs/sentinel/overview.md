@@ -48,6 +48,36 @@ See [Installation](./installation.md) for download links and the full platform s
 
 ---
 
+## What's New in v2.3.0
+
+### ATTM Fire Drills — Agent-Initiated Architecture
+
+v2.3.0 overhauls ATTM into an **agent-initiated fire drill** model. Instead of the server pushing playbooks to endpoints, each Sentinel agent now runs its 19 built-in MITRE ATT&CK techniques locally and POST-backs results through the real telemetry pipeline (`/api/sentinel/telemetry`). This means fire drill events traverse the same ingestion, correlation, and alerting path as real threats -- validating your entire detection stack end-to-end.
+
+**Key changes in v2.3.0:**
+
+- **Agent POST-back flow** -- ATTM results are submitted as standard telemetry, so every layer of your pipeline (ingestion, correlation rules, alerting thresholds) is exercised.
+- **Simplified playbook resolution** -- the agent uses its built-in default playbook or a local `--playbook` file. Server-side playbook CRUD and execution scheduling have been removed.
+- **Detection coverage matrix** -- after a fire drill, the platform builds a per-technique coverage matrix showing which of the 19 techniques triggered a detection and which did not.
+- **Auto GRC control mapping** -- fire drill results automatically map to relevant GRC controls. When a technique is detected successfully, the corresponding control receives evidence that its detection capability is validated. Failed detections surface as control gaps in the GRC module.
+
+### GRC Integration
+
+ATTM fire drills feed directly into the GRC compliance workflow:
+
+| What happens | Where it shows up |
+|---|---|
+| Technique detected successfully | GRC control receives automated evidence artifact (type: `attm_fire_drill`) |
+| Technique not detected | GRC control flagged with a detection gap nonconformity |
+| Coverage matrix updated | Security Analytics > GRC Validation tab |
+| MITRE coverage stats refreshed | MITRE ATT&CK heatmap (`/mitre`) |
+
+This closes the loop between adversarial testing and compliance -- you can prove to auditors that your detection controls are validated on a recurring schedule, with machine-generated evidence.
+
+See [ATTM — Adversarial Testing](./attm.md) for CLI usage and technique details, and [Release Notes](/downloads/release-notes#v230) for the full changelog.
+
+---
+
 ## What's New in v2.1.0
 
 ### ATTM — Adversarial Telemetry Testing Module

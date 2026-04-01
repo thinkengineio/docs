@@ -115,8 +115,11 @@ The exact event count per level is technique-specific. For example, Brute Force 
 ### Playbook Resolution Order
 
 1. `--playbook /path/to/file.json` — local file (highest priority)
-2. API fetch from `--server` URL — if server is configured and reachable
-3. Built-in default playbook — all 19 techniques at medium intensity with 30s duration
+2. Built-in default playbook — all 19 techniques at medium intensity with 30s duration
+
+:::note
+As of v2.3.0, server-side playbook fetch has been removed. The agent resolves playbooks locally using either a `--playbook` file or its built-in defaults. Results are POST-backed through `/api/sentinel/telemetry` to traverse the full ingestion pipeline.
+:::
 
 ---
 

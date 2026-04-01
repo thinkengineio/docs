@@ -16,7 +16,7 @@ The Security Analytics page in the dashboard is organized into the following tab
 | **Dashboard** | Top-level metrics, alert volume, and threat timeline |
 | **Rules** | Correlation and detection rules with a **Create Rule** form and **enable/disable** toggles per rule |
 | **Risk Scoring** | Organization and per-endpoint risk scores with factor breakdowns |
-| **GRC Validation** | Compliance control validation against security posture data |
+| **GRC Validation** | Compliance control validation against security posture data, including ATTM fire drill evidence artifacts and automated control gap detection |
 | **AI Analysis** | Sofia AI-powered analysis of trends, anomalies, and recommendations |
 
 **Removed tabs:** The **Correlations** tab has been removed -- correlation findings now flow directly into the [SecOps triage queue](/platform/soc). The **Search** tab has been removed -- search is now available in the [Endpoints page](/sentinel/overview#search-tab) alongside endpoint telemetry.
