@@ -10,6 +10,19 @@ Release history for the Sentinel agent. Download the latest version from the [Se
 
 ---
 
+## v2.3.0
+
+**ATTM Fire Drill — Agent-Initiated Architecture**
+
+This release updates ATTM to an agent-initiated flow where the endpoint runs synthetic MITRE techniques and reports results back through the real network/API pipeline.
+
+- **Agent POST-back** -- ATTM results are sent via `/api/sentinel/telemetry`, traversing the full ingestion pipeline
+- **Simplified playbook resolution** -- agent uses built-in default or local `--playbook` file (removed server-side fetch)
+- **Cleaned up dead endpoints** -- removed server-side playbook CRUD and execution scheduling
+- **Fixed Go module version** -- corrected `go.mod` from 1.25.0 to 1.23.0
+
+---
+
 ## v2.1.0
 
 **Adversarial Testing Module (ATTM)**
