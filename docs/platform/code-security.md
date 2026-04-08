@@ -71,6 +71,6 @@ Code security findings can map to compliance controls in the [GRC module](/platf
 
 ## Next Steps
 
-- [Tasks](/platform/tasks) -- Submit custom security tasks to Sofia.
+- [Sofia AI](/platform/sofia-ai) -- Ask Sofia to investigate a finding or generate a fix.
 - [Incidents](/platform/incidents) -- Escalate critical findings into incidents.
 - [Code Security API](/api/code-security) -- Access scan results programmatically.

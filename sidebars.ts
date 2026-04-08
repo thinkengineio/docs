@@ -20,7 +20,6 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'platform/dashboard',
-        'platform/tasks',
         'platform/soc',
         'platform/grc',
         'platform/code-security',
@@ -59,7 +58,6 @@ const sidebars: SidebarsConfig = {
         'api/authentication',
         'api/rate-limits',
         'api/errors',
-        'api/tasks',
         'api/sentinel',
         'api/grc',
         'api/security-analytics',
@@ -68,8 +66,6 @@ const sidebars: SidebarsConfig = {
         'api/incidents',
         'api/mitre',
         'api/endpoints',
-        'api/prompts-skills',
-        'api/memory',
         'api/billing',
         'api/user',
       ],
@@ -78,12 +74,42 @@ const sidebars: SidebarsConfig = {
   integrations: [
     {
       type: 'category',
-      label: 'Integrations',
+      label: 'Source Control',
       collapsed: false,
       items: [
         'integrations/github',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Alert Destinations',
+      collapsed: false,
+      items: [
         'integrations/slack',
+        'integrations/discord',
+        'integrations/teams',
+        'integrations/email',
         'integrations/webhooks',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Ticketing',
+      collapsed: false,
+      items: [
+        'integrations/jira',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Cloud Providers',
+      collapsed: false,
+      items: [
+        'integrations/aws',
+        'integrations/azure',
+        'integrations/gcp',
+        'integrations/oci',
+        'integrations/cloudflare',
       ],
     },
   ],

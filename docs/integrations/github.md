@@ -65,7 +65,7 @@ When Sofia works on a GitHub issue:
 4. She pushes the branch and opens a pull request with a detailed description of what was changed and why.
 5. She comments on the original issue with a link to the PR.
 
-The full conversation log is available in the [Tasks](/platform/tasks) section of the ThinkEngine dashboard.
+The full conversation log is available in the [Sofia AI](/platform/sofia-ai) chat history of the ThinkEngine dashboard.
 
 ## Permissions
 
@@ -82,5 +82,5 @@ You can review and modify permissions at any time from your GitHub organization 
 ## Next Steps
 
 - [Slack Integration](/integrations/slack) -- Interact with Sofia from Slack.
-- [Tasks](/platform/tasks) -- View and manage tasks triggered from GitHub.
+- [Sofia AI](/platform/sofia-ai) -- View and manage conversations triggered from GitHub.
 - [Code Security](/platform/code-security) -- Review scan results from connected repositories.

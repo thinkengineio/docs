@@ -117,4 +117,4 @@ Integration configuration is stored in PostgreSQL (not Redis), ensuring durabili
 
 - [GitHub Integration](/integrations/github) -- Connect your repositories for issue-driven workflows.
 - [Webhooks](/integrations/webhooks) -- Set up custom webhook notifications.
-- [Tasks](/platform/tasks) -- View tasks submitted from Slack in the dashboard.
+- [Discord](/integrations/discord) -- Same alert pipeline, Discord destination.
