@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'ThinkEngine Docs',
   tagline: 'AI-native security monitoring and autonomous agent platform',
-  favicon: 'img/logo.png',
+  favicon: 'favicon.ico',
   url: 'https://docs.thinkengine.io',
   baseUrl: '/',
   organizationName: 'thinkengineio',
