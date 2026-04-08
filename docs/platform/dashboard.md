@@ -73,13 +73,13 @@ Use the sidebar to move between platform sections:
 
 From the dashboard you can:
 
-- **Submit a new task** -- Click the **+ New Task** button in the top bar to describe work for Sofia.
+- **Chat with Sofia** -- Click the chat icon in the top bar to ask Sofia to investigate, generate, or remediate.
 - **Acknowledge an alert** -- Click an alert in the Recent Alerts widget to open it and begin triage.
 - **View agent fleet** -- Click any agent status indicator to jump to the Sentinel fleet view.
-- **Search** -- Use the global search bar to find tasks, alerts, incidents, or compliance controls by keyword.
+- **Search** -- Use the global search bar to find alerts, incidents, or compliance controls by keyword.
 
 ## Next Steps
 
-- [Tasks](/platform/tasks) -- Learn how to submit and manage AI-powered tasks.
+- [Sofia AI](/platform/sofia-ai) -- Learn how to chat with Sofia and use the AI assistant.
 - [SOC](/platform/soc) -- Explore the Security Operations Center.
 - [Getting Started](/getting-started/quick-start) -- New to ThinkEngine? Start here.

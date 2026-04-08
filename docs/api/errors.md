@@ -44,8 +44,9 @@ Some error responses include additional context fields:
 ### Invalid JSON Body
 
 ```bash
-curl -X POST https://thinkengine.io/api/tasks \
+curl -X POST https://api.thinkengine.io/api/chat \
   -H "Authorization: Bearer <token>" \
+  -H "X-Auth-Org-Id: <org_id>" \
   -H "Content-Type: application/json" \
   -d "not valid json"
 ```
@@ -59,35 +60,52 @@ curl -X POST https://thinkengine.io/api/tasks \
 ### Missing Required Field
 
 ```bash
-curl -X POST https://thinkengine.io/api/tasks \
+curl -X POST https://api.thinkengine.io/api/chat \
   -H "Authorization: Bearer <token>" \
+  -H "X-Auth-Org-Id: <org_id>" \
   -H "Content-Type: application/json" \
-  -d '{"mode": "plan"}'
+  -d '{}'
 ```
 
 ```json
 {
-  "error": "goal is required"
+  "error": "message is required"
 }
 ```
 
-### Resource Not Found
+### AI Request Quota Exhausted (Free tier)
+
+When a Free-tier organization hits its monthly 200 request cap, `/api/chat` returns `402`:
 
 ```bash
-curl https://thinkengine.io/api/tasks/nonexistent-id \
-  -H "Authorization: Bearer <token>"
+curl -X POST https://api.thinkengine.io/api/chat \
+  -H "Authorization: Bearer <token>" \
+  -H "X-Auth-Org-Id: <org_id>" \
+  -H "Content-Type: application/json" \
+  -d '{"message": "hello"}'
+```
+
+```
+HTTP/1.1 402 Payment Required
 ```
 
 ```json
 {
-  "error": "not found"
+  "error": "request_quota_exhausted",
+  "tier": "free",
+  "used": 200,
+  "limit": 200,
+  "upgrade_url": "/plans?tab=billing",
+  "message": "Your organization has used its 200 included AI requests this month. Upgrade to Pro for 500 included requests plus metered overage at $0.05/request."
 }
 ```
+
+Pro and Pro Max orgs are not blocked at the cap — instead, each over-quota request bills at the metered overage rate ($0.05/req for Pro, $0.04/req for Pro Max). See [Billing](/api/billing) for details.
 
 ### Authentication Failure
 
 ```bash
-curl https://thinkengine.io/api/tasks
+curl https://api.thinkengine.io/api/tier
 ```
 
 ```
