@@ -48,6 +48,31 @@ See [Installation](./installation.md) for download links and the full platform s
 
 ---
 
+## What's New in v2.4.0
+
+### Telemetry Storage Redesign
+
+v2.4.0 introduces a completely redesigned telemetry storage pipeline that replaces the previous PostgreSQL-based `sentinel_telemetry` table with a scalable, encrypted object storage architecture:
+
+- **Redis buffer** -- incoming telemetry is buffered in Redis for high write throughput
+- **Encrypted Parquet** -- a background flusher converts buffered events to columnar Parquet files, encrypts them per-organization (AES-256-GCM), and uploads to OCI Object Storage
+- **DuckDB query engine** -- historical search queries decrypt and scan Parquet files in-memory via DuckDB (decrypted data never touches disk)
+
+This architecture scales to high-volume telemetry workloads without increasing database costs, while maintaining per-tenant encryption at rest.
+
+### Investigate Page
+
+A new **Investigate** page at `/sentinel/investigate` provides full historical telemetry search across your entire fleet. Features include:
+
+- Free-text search across all event fields
+- Filter by module, agent, severity, and time range (1h to 90d)
+- Per-tier retention: Free (7d), Pro (30d), Pro Max (90d), Enterprise (custom)
+- Detail panel for full event inspection
+
+See [Investigate](./investigate.md) for full documentation.
+
+---
+
 ## What's New in v2.3.0
 
 ### ATTM Fire Drills — Agent-Initiated Architecture

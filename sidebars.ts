@@ -39,6 +39,7 @@ const sidebars: SidebarsConfig = {
         'sentinel/installation',
         'sentinel/configuration',
         'sentinel/monitoring',
+        'sentinel/investigate',
         'sentinel/security-scanning',
         'sentinel/remediation',
         'sentinel/fleet-mode',
@@ -46,6 +47,16 @@ const sidebars: SidebarsConfig = {
         'sentinel/attm',
         'sentinel/cli-reference',
         'sentinel/troubleshooting',
+      ],
+    },
+  ],
+  darius: [
+    {
+      type: 'category',
+      label: 'Darius DAST',
+      collapsed: false,
+      items: [
+        'darius/overview',
       ],
     },
   ],
