@@ -83,7 +83,6 @@ const config: Config = {
           title: 'Product',
           items: [
             {label: 'ThinkEngine', href: 'https://thinkengine.io'},
-            {label: 'SleuthGraph', href: 'https://sleuthgraph.io'},
             {label: 'GitHub', href: 'https://github.com/thinkengineio'},
           ],
         },

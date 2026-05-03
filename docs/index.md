@@ -15,6 +15,5 @@ Welcome to the ThinkEngine documentation. ThinkEngine is an AI-native security m
 - **[Platform Guide](/platform/dashboard)** -- Explore the platform dashboard, tasks, SOC, GRC, and more.
 - **[Sentinel Agent](/sentinel/overview)** -- Deploy and configure the Sentinel monitoring agent.
 - **[API Reference](/api/authentication)** -- Integrate with the ThinkEngine API.
-- **[SleuthGraph](https://sleuthgraph.io)** -- Open-source attack surface intelligence by ThinkEngine.
 - **[Integrations](/integrations/github)** -- Connect GitHub, Slack, and webhooks.
 - **[Downloads](/downloads/sentinel-agent)** -- Download the Sentinel agent.
