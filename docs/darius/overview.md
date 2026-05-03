@@ -90,7 +90,7 @@ Darius runs on **macOS**, **Linux**, and **Windows**:
 
 ### 1. Download
 
-Download the latest release for your platform from the ThinkEngine dashboard under **DAST > Settings**, or from the [Downloads](/downloads/sentinel-agent) page.
+Download the latest release for your platform from the ThinkEngine dashboard under **DAST > Settings**, or from the [Downloads](/downloads/darius) page.
 
 ### 2. Run a scan
 
