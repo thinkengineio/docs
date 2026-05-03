@@ -14,13 +14,13 @@ description: Darius DAST — Dynamic Application Security Testing
 
 ## What Darius Does
 
-Darius combines three scanning engines into a single binary:
+Darius combines multiple scanning engines into a single binary:
 
-| Engine | What it scans |
+| Capability | What it scans |
 |--------|--------------|
-| **Nuclei** | 7,000+ vulnerability templates covering known CVEs, misconfigurations, and exposures |
-| **Playwright Browser** | JavaScript-rendered pages, SPAs, and authenticated flows that require a real browser |
-| **OpenAPI Fuzzer** | API endpoints defined in OpenAPI/Swagger specs -- injects payloads across 5 attack categories |
+| **Vulnerability Templates** | 7,000+ templates covering known CVEs, misconfigurations, and exposures |
+| **Browser Engine** | JavaScript-rendered pages, SPAs, and authenticated flows that require a real browser |
+| **API Fuzzer** | API endpoints defined in OpenAPI/Swagger specs -- injects payloads across 5 attack categories |
 
 Darius produces structured findings with CVSS scores, CWE classifications, and reproduction steps.
 
@@ -31,7 +31,7 @@ Darius produces structured findings with CVSS scores, CWE classifications, and r
 | Feature | Community (Free) | Professional ($399/yr) | Enterprise (Platform) |
 |---------|-----------------|----------------------|----------------------|
 | Scan coverage | Quick scans (top 100 templates) | All profiles (7,000+ templates) | All profiles (7,000+ templates) |
-| Engine | Nuclei only | Nuclei + Playwright + OpenAPI fuzzer | Nuclei + Playwright + OpenAPI fuzzer |
+| Engine | Template scanner only | Full engine (templates + browser + API fuzzer) | Full engine (templates + browser + API fuzzer) |
 | Output | JSON to stdout | HTML reports + local SQLite history | HTML reports + SaaS integration |
 | Network | No network required | Offline -- works on pentester laptops | Findings flow into ThinkEngine platform |
 | Account | No account needed | Account for license delivery only | Full team workspace |
@@ -56,9 +56,9 @@ Darius produces structured findings with CVSS scores, CWE classifications, and r
 │                                                      │
 │   darius scan --target https://app.example.com       │
 │         │                                            │
-│         ├── Nuclei templates (CVE/misconfig/exposure)│
-│         ├── Playwright (SPA, auth flows, DOM XSS)    │
-│         └── OpenAPI fuzzer (injection, auth bypass)   │
+│         ├── Vulnerability templates (CVE/misconfig)  │
+│         ├── Browser engine (SPA, auth flows, DOM XSS)│
+│         └── API fuzzer (injection, auth bypass)      │
 │                                                      │
 │   → JSON/HTML findings (never leave your machine     │
 │     unless you opt into SaaS integration)            │

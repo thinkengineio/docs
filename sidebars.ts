@@ -131,6 +131,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'downloads/sentinel-agent',
+        'downloads/darius',
         'downloads/release-notes',
       ],
     },
