@@ -52,13 +52,13 @@ See [Installation](./installation.md) for download links and the full platform s
 
 ### Telemetry Storage Redesign
 
-v2.4.0 introduces a completely redesigned telemetry storage pipeline that replaces the previous PostgreSQL-based `sentinel_telemetry` table with a scalable, encrypted object storage architecture:
+v2.4.0 introduces a completely redesigned telemetry storage pipeline built on encrypted object storage:
 
-- **Redis buffer** -- incoming telemetry is buffered in Redis for high write throughput
-- **Encrypted Parquet** -- a background flusher converts buffered events to columnar Parquet files, encrypts them per-organization (AES-256-GCM), and uploads to OCI Object Storage
-- **DuckDB query engine** -- historical search queries decrypt and scan Parquet files in-memory via DuckDB (decrypted data never touches disk)
+- **High-throughput ingest** -- incoming telemetry is buffered for fast write performance
+- **Per-organization encryption** -- telemetry is encrypted at rest with AES-256-GCM using per-organization keys; cross-tenant access is cryptographically impossible
+- **Scalable search** -- historical queries decrypt and scan data in-memory (decrypted data never touches disk)
 
-This architecture scales to high-volume telemetry workloads without increasing database costs, while maintaining per-tenant encryption at rest.
+This architecture scales to high-volume telemetry workloads without increasing costs, while maintaining strong per-tenant isolation.
 
 ### Investigate Page
 
@@ -70,6 +70,20 @@ A new **Investigate** page at `/sentinel/investigate` provides full historical t
 - Detail panel for full event inspection
 
 See [Investigate](./investigate.md) for full documentation.
+
+---
+
+## What's New in v2.3.3
+
+### Vulnerability Severity Resolution
+
+v2.3.3 fixes a long-standing issue where the OSV vulnerability scanner reported most CVEs as UNKNOWN severity. The root cause: OSV returns CVSS vector strings (not text labels like "HIGH") for many ecosystems, and the parser wasn't computing the base score. Additionally, some ecosystems (notably Debian's binutils, coreutils) return no severity data from OSV at all.
+
+**Key changes in v2.3.3:**
+
+- **CVSS v3.1 base score computation** -- the agent now parses CVSS vectors per the FIRST specification and maps the computed score to CRITICAL/HIGH/MEDIUM/LOW
+- **NVD API fallback** -- CVEs with no OSV severity data are enriched via the NVD REST API, rate-limited and capped at 50 lookups per scan cycle
+- **Optional `NVD_API_KEY` env var** -- increases NVD rate limits from 5 req/30s to 50 req/30s for faster enrichment
 
 ---
 

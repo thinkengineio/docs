@@ -10,6 +10,35 @@ Release history for the Sentinel agent. Download the latest version from the [Se
 
 ---
 
+## v2.3.3
+
+**Vulnerability Severity Fix — CVSS Parsing + NVD Fallback**
+
+Resolves UNKNOWN severity for the majority of CVEs reported by the OSV scanner.
+
+- **CVSS v3.1 vector parsing** -- OSV returns CVSS vector strings (not text labels) for many Debian CVEs; the scanner now computes base scores per the FIRST specification
+- **NVD API fallback** -- for CVEs where OSV returns no severity data at all, the scanner queries NVD's REST API as a fallback (rate-limited, capped at 50 lookups per scan cycle)
+- **In-memory cache** -- NVD results are cached across scan cycles to avoid redundant lookups
+- **Optional `NVD_API_KEY`** -- set this env var to increase NVD rate limits from 5 req/30s to 50 req/30s
+
+---
+
+## v2.3.2
+
+**Self-Rotate on Sustained 401s**
+
+- **Automatic credential rotation** -- agent detects sustained 401 rejections and self-rotates its API key to recover without manual intervention
+
+---
+
+## v2.3.1
+
+**Config File API Key Support**
+
+- **`config.yaml` API key** -- read `apiKey` from `/etc/sentinel/config.yaml` instead of requiring `-api-key` CLI flag (eliminates key exposure in `ps` output)
+
+---
+
 ## v2.3.0
 
 **ATTM Fire Drill — Agent-Initiated Architecture**
