@@ -23,6 +23,28 @@ Sentinel provides active remediation capabilities for incident response and netw
 | **Port Scanner** | `--scan-ports <target>` | Scan for open ports |
 | **Security Audit** | `--security-audit` | Security posture assessment |
 
+## AI Remediation Actions (v2.4.0+)
+
+When connected to the ThinkEngine platform, Sofia can send signed MCP commands to the Sentinel agent for automated remediation. These actions are executed via the HTTPS remediation listener.
+
+| Action | Safety Tier | Description |
+|--------|-------------|-------------|
+| `fix_file_permissions` | auto | Tighten permissions on allowlisted system files |
+| `enable_firewall` | auto | Enable ufw or firewalld |
+| `restart_service` | auto | Restart a systemd service |
+| `hardening_fix_sysctl` | auto | Write sysctl params + apply (v2.4.0) |
+| `hardening_fix_passwd_policy` | auto | Update /etc/login.defs password policy (v2.4.0) |
+| `hardening_fix_tmpfs` | auto | Mount /tmp as tmpfs with restricted options (v2.4.0) |
+| `rescan_module` | auto | Re-run a scan module and return results (v2.4.0) |
+| `block_ip` | approval | Block an IP via iptables |
+| `unblock_ip` | approval | Remove an IP block |
+| `terminate_process` | approval | Send SIGTERM to a PID |
+| `package_update` | approval | Update a specific package |
+
+**Safety tiers:**
+- **auto** -- Sofia executes immediately without human approval
+- **approval** -- queued for human review in the dashboard before execution
+
 ### Examples
 
 ```bash

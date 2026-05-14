@@ -10,6 +10,21 @@ Release history for the Sentinel agent. Download the latest version from the [Se
 
 ---
 
+## v2.4.0
+
+**AI Remediation Handlers + Rescan Module**
+
+Adds 4 new remediation handlers to the Sentinel agent, enabling Sofia's AI remediation loop to execute OS-level hardening fixes and verify them via re-scan.
+
+- **`hardening_fix_sysctl`** -- write sysctl params to `/etc/sysctl.d/99-sofia-hardening.conf` and apply. Supports updating existing keys or appending new ones.
+- **`hardening_fix_passwd_policy`** -- update `/etc/login.defs` password aging policy (PASS_MAX_DAYS, PASS_MIN_DAYS, PASS_MIN_LEN).
+- **`hardening_fix_tmpfs`** -- mount `/tmp` as tmpfs with restricted options (nosuid, nodev, noexec) via fstab.
+- **`rescan_module`** -- re-run a specific security scan module (hardening) and return results. Read-only action used by the verification loop to confirm fixes worked.
+- All handlers create `.bak` backups before modifying system files.
+- **11 total remediation actions** (was 7 in v2.3.3).
+
+---
+
 ## v2.3.3
 
 **Vulnerability Severity Fix — CVSS Parsing + NVD Fallback**
