@@ -10,6 +10,20 @@ Release history for the Sentinel agent. Download the latest version from the [Se
 
 ---
 
+## v2.4.1
+
+**Remediation Listener Wiring**
+
+Completes the Tier 3 AI remediation pipeline by wiring the HTTPS remediation listener into the Sentinel binary's `main()`.
+
+- **`--remediation-listen`** flag -- starts the remediation endpoint (background goroutine in forward mode, blocking in standalone)
+- **`--remediation-port`** flag (default `9443`) -- configurable listener port
+- **`--remediation-key`** flag -- HMAC shared key (fallback: `SENTINEL_REMEDIATION_KEY` env var)
+- TLS via `SENTINEL_TLS_CERT` / `SENTINEL_TLS_KEY` env vars
+- Fixes: handlers compiled since v2.4.0 but listener was never started
+
+---
+
 ## v2.4.0
 
 **AI Remediation Handlers + Rescan Module**
