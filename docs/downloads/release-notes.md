@@ -10,6 +10,18 @@ Release history for the Sentinel agent. Download the latest version from the [Se
 
 ---
 
+## v2.4.2
+
+**Wire Protocol Fix — HMAC Key Derivation from API Key**
+
+Fixes the Tier 3 remediation wire protocol so the Python orchestrator and Go agent can actually communicate end-to-end.
+
+- **Auto-derive remediation key from API key** -- `HMAC-SHA256(api_key, "remediation-v1")` computed automatically when `--remediation-key` is not set. Zero-config upgrade for agents already running with `--api-key`.
+- **Fix HMAC signature verification** -- `verifyCommandSignature` now hex-decodes the master key before derivation. Previously used raw ASCII bytes, causing permanent signature mismatch.
+- **Cross-language test vectors** -- 7 Go tests pinning exact byte-level agreement with Python signer.
+
+---
+
 ## v2.4.1
 
 **Remediation Listener Wiring**
