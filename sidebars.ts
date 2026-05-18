@@ -58,6 +58,9 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'darius/overview',
+        'darius/installation',
+        'darius/cli-reference',
+        'darius/scan-profiles',
       ],
     },
   ],
