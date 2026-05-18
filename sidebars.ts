@@ -128,6 +128,16 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
+  security: [
+    {
+      type: 'category',
+      label: 'Security',
+      collapsed: false,
+      items: [
+        'security',
+      ],
+    },
+  ],
 };
 
 export default sidebars;
