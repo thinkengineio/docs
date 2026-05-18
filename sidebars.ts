@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
         'platform/incidents',
         'platform/mitre',
         'platform/billing',
+        'platform/sofia-ai',
       ],
     },
   ],
