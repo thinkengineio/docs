@@ -18,7 +18,7 @@ After signing up, log in to the ThinkEngine dashboard. You will land on the over
 
 ## 3. Submit a Task
 
-Navigate to the **Tasks** page and submit your first task to Sofia. Describe what you need -- for example, "scan my repository for hardcoded secrets" or "review this pull request for security issues." Sofia will autonomously work through the task and report back with results. You can also submit tasks programmatically via the [API](/api/authentication).
+Navigate to the **Tasks** page and submit your first task to Sofia. Describe what you need -- for example, "scan my repository for hardcoded secrets" or "review this pull request for security issues." Sofia will autonomously work through the task and report back with results. You can also submit tasks programmatically via the API (available to authenticated platform users).
 
 ## 4. Install Sentinel
 

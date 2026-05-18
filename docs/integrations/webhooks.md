@@ -173,4 +173,4 @@ From **Settings > Integrations > Webhooks** you can:
 
 - [GitHub Integration](/integrations/github) -- Automate issue-to-PR workflows.
 - [Slack Integration](/integrations/slack) -- Get notifications in Slack.
-- [API Reference](/api/authentication) -- Build deeper integrations with the REST API.
+- API documentation is available to authenticated platform users.

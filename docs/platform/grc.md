@@ -130,4 +130,4 @@ The risk register tracks identified risks:
 
 - [SOC](/platform/soc) -- Security events that feed into GRC findings
 - [Code Security](/platform/code-security) -- Scan results mapped to controls
-- [GRC API](/api/grc) -- Manage GRC data programmatically
+- API documentation is available to authenticated platform users

@@ -62,7 +62,6 @@ const config: Config = {
         {type: 'docSidebar', sidebarId: 'platform', position: 'left', label: 'Platform'},
         {type: 'docSidebar', sidebarId: 'sentinel', position: 'left', label: 'Sentinel'},
         {type: 'docSidebar', sidebarId: 'darius', position: 'left', label: 'Darius'},
-        {type: 'docSidebar', sidebarId: 'api', position: 'left', label: 'API'},
         {type: 'docSidebar', sidebarId: 'integrations', position: 'left', label: 'Integrations'},
         {type: 'docSidebar', sidebarId: 'downloads', position: 'left', label: 'Downloads'},
         {href: 'https://thinkengine.io', label: 'ThinkEngine', position: 'right'},
@@ -78,7 +77,6 @@ const config: Config = {
             {label: 'Getting Started', to: '/getting-started/what-is-thinkengine'},
             {label: 'Sentinel Agent', to: '/sentinel/overview'},
             {label: 'Darius DAST', to: '/darius/overview'},
-            {label: 'API Reference', to: '/api/authentication'},
           ],
         },
         {

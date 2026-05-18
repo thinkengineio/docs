@@ -49,4 +49,4 @@ Create, track, and resolve security incidents with full audit trails. Integrate 
 
 - [Quick Start](/getting-started/quick-start) -- Get up and running in 5 minutes
 - [Sentinel Agent](/sentinel/overview) -- Deploy endpoint monitoring
-- [API Reference](/api/authentication) -- Integrate with the ThinkEngine API
+- API documentation is available to authenticated platform users

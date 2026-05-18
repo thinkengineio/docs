@@ -68,4 +68,4 @@ Click any technique on the heatmap to see:
 
 - [SOC](/platform/soc) -- View alerts mapped to MITRE techniques.
 - [Sentinel ATTM](/sentinel/attm) -- Test your detection coverage with synthetic events.
-- [MITRE API](/api/mitre) -- Access coverage data programmatically.
+- API documentation is available to authenticated platform users.

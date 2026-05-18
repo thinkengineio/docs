@@ -60,28 +60,6 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
-  api: [
-    {
-      type: 'category',
-      label: 'API Reference',
-      collapsed: false,
-      items: [
-        'api/authentication',
-        'api/rate-limits',
-        'api/errors',
-        'api/sentinel',
-        'api/grc',
-        'api/security-analytics',
-        'api/soc',
-        'api/code-security',
-        'api/incidents',
-        'api/mitre',
-        'api/endpoints',
-        'api/billing',
-        'api/user',
-      ],
-    },
-  ],
   integrations: [
     {
       type: 'category',

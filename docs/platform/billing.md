@@ -93,10 +93,10 @@ You can change the billing contact email under **Settings → Plans & Billing �
 
 ## Programmatic Access
 
-The current tier, usage counters, and remaining quota are available via the API. See the [Billing API](/api/billing) for endpoint details.
+The current tier, usage counters, and remaining quota are available via the API. API documentation is available to authenticated platform users.
 
 ## Next Steps
 
 - [Plans page](https://thinkengine.io/plans) — Manage your subscription
-- [Billing API](/api/billing) — Programmatic access to tier and usage
+- API documentation is available to authenticated platform users
 - [Dashboard](/platform/dashboard) — Return to the platform overview
