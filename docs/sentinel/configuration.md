@@ -73,7 +73,7 @@ Most config values can be overridden at runtime with CLI flags. For example:
 
 ```bash
 # Override agent ID and webhook interval
-sentinel --forward --server https://dashboard.thinkengine.io \
+sentinel --forward --server https://thinkengine.io \
   --agent-id custom-agent-01 \
   --interval 120
 ```

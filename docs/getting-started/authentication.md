@@ -30,7 +30,7 @@ Authorization: Bearer <your-token>
 ### Example Request
 
 ```bash
-curl -X GET https://api.thinkengine.io/api/tier \
+curl -X GET https://thinkengine.io/api/tier \
   -H "Authorization: Bearer <your-token>" \
   -H "X-Auth-Org-Id: <your-org-id>" \
   -H "Content-Type: application/json"

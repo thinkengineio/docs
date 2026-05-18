@@ -16,7 +16,7 @@ Use `--forward` with a server URL to send telemetry to the ThinkEngine dashboard
 
 ```bash
 # Forward all 13 event types (full security scan)
-sentinel --forward --server https://dashboard.thinkengine.io \
+sentinel --forward --server https://thinkengine.io \
   --api-key sk-sentinel-xxx \
   --agent-id prod-web-01 \
   --tags production,webserver,us-east \
@@ -24,7 +24,7 @@ sentinel --forward --server https://dashboard.thinkengine.io \
   --interval 60
 
 # Forward only core telemetry + selective security modules
-sentinel --forward --server https://dashboard.thinkengine.io \
+sentinel --forward --server https://thinkengine.io \
   --api-key sk-sentinel-xxx \
   --hardening --inventory --threat-detect
 ```
