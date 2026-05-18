@@ -61,6 +61,16 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
+  sleuthgraph: [
+    {
+      type: 'category',
+      label: 'Sleuthgraph',
+      collapsed: false,
+      items: [
+        'sleuthgraph/overview',
+      ],
+    },
+  ],
   integrations: [
     {
       type: 'category',

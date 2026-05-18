@@ -62,6 +62,7 @@ const config: Config = {
         {type: 'docSidebar', sidebarId: 'platform', position: 'left', label: 'Platform'},
         {type: 'docSidebar', sidebarId: 'sentinel', position: 'left', label: 'Sentinel'},
         {type: 'docSidebar', sidebarId: 'darius', position: 'left', label: 'Darius'},
+        {type: 'docSidebar', sidebarId: 'sleuthgraph', position: 'left', label: 'Sleuthgraph'},
         {type: 'docSidebar', sidebarId: 'integrations', position: 'left', label: 'Integrations'},
         {type: 'docSidebar', sidebarId: 'downloads', position: 'left', label: 'Downloads'},
         {href: 'https://thinkengine.io', label: 'ThinkEngine', position: 'right'},
