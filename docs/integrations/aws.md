@@ -86,4 +86,6 @@ If you operate across multiple AWS regions, leave the **Region** field set to yo
 
 ## Related
 
-- [Cloudflare](/integrations/cloudflare)
+- [Azure](/integrations/azure)
+- [GCP](/integrations/gcp)
+- [OCI](/integrations/oci)

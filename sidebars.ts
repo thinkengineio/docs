@@ -109,6 +109,9 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'integrations/aws',
+        'integrations/azure',
+        'integrations/gcp',
+        'integrations/oci',
         'integrations/cloudflare',
       ],
     },
